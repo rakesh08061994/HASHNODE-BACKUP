@@ -427,6 +427,14 @@ Why Sockets is important and useful?
     
 9. `How to Add a Network Connection?`
     
+    1. Uses Manual Connection build (Not autoconnect on startup)
+        
+        ```plaintext
+        # nmcli con add con-name test type ethernet ifname ens160 ipv4.addresses 192.168.199.130/24 ipv4.dns 8.8.8.8 ipv4.gateway 192.168.199.254 connection.autoconnect yes ipv4.method manual    
+        ```
+        
+    2. connection uses a DHCP service and has the device autoconnect on startup.
+        
 10. `How to Modify an existing Network Connections?`
     
 11. `How to delete an Network Connection?`
