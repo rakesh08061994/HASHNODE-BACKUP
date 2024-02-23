@@ -414,6 +414,27 @@ Why Sockets is important and useful?
     
 7. `Changes in Red Hat Enterprise Linux 8:` Starting in Red Hat Enterprise Linux 8, ifcfg format configuration files and the `/etc/sysconfig/network-scripts/` directory are deprecated. NetworkManager now uses an INI-style key file format, which is a key-value pair structure to organize properties. NetworkManager stores network profiles in the `/etc/NetworkManager/system-connections/` directory. For compatibility with earlier versions, ifcfg format connections in the `/etc/sysconfig/network-scripts/` directory are still recognized and loaded.
     
+8. `How to View Network Information?`
+    
+    ```plaintext
+    # nmcli connection show
+    # nmcli connection show <connection-name>
+    # nmcli connection show --active
+    # nmcli device show
+    # nmcli device show <device-name>
+    # nmcli device status
+    ```
+    
+9. `How to Add a Network Connection?`
+    
+10. `How to Modify an existing Network Connections?`
+    
+11. `How to delete an Network Connection?`
+    
+
+---
+
+### Useful NetworkManager Commands
 
 ---
 
