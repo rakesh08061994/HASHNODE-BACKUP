@@ -392,6 +392,29 @@ Why Sockets is important and useful?
 
 ---
 
+### NetworkManager & Configuration Setup
+
+1. `What is NetworkManager?` NetworkManager is a service that monitors and manages a system’s network settings. It is designed to simplify and automate the control of network connections.
+    
+    ```plaintext
+    # systemctl status NetworkManager.service
+    ```
+    
+2. `Purpose of NetworkManager:` The purpose of NetworkManager is to keep track of network devices and connections, and to ensure that network access is available when needed and not used when not needed.
+    
+3. `Interaction with NetworkManager:` Users can interact with the NetworkManager service via the command line or with graphical tools. In the GNOME graphical environment, a Notification Area applet displays network configuration and status information that is received from the NetworkManager daemon.
+    
+4. **Configuration Files:** The configuration files for the service are stored in the `/etc/NetworkManager/system-connections/` directory.
+    
+5. **Network Devices and Connections:** A network device is a physical or virtual network interface that provides for network traffic. A connection is a collection of related configuration settings for a single network device, also known as a network profile. Each connection must have a unique name or ID, which can match the device name that it configures.
+    
+6. **Multiple Connection Configurations:** A single device can have multiple connection configurations and switch between them, but only one connection can be active per device. For example, a laptop wireless device might configure a fixed IP address for use at a secure work site in one connection, but might configure a second connection with an automated address and a virtual private network (VPN) to access the same company network from home.
+    
+7. **Changes in Red Hat Enterprise Linux 8:** Starting in Red Hat Enterprise Linux 8, ifcfg format configuration files and the `/etc/sysconfig/network-scripts/` directory are deprecated. NetworkManager now uses an INI-style key file format, which is a key-value pair structure to organize properties. NetworkManager stores network profiles in the `/etc/NetworkManager/system-connections/` directory. For compatibility with earlier versions, ifcfg format connections in the `/etc/sysconfig/network-scripts/` directory are still recognized and loaded.
+    
+
+---
+
 ### Reference Links:
 
 * [https://aws.amazon.com/what-is/computer-networking/](https://aws.amazon.com/what-is/computer-networking/)
