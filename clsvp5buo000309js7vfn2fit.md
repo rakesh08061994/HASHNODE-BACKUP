@@ -474,14 +474,184 @@ Why Sockets is important and useful?
     # nmcli connection up <connection-name>
     # nmcli connection down <connection-name>
     # nmcli device disconnect <device-IF-name>
+    # nmcli connection reload <connection-name>
     ```
     
 12. `How to delete an Network Connection?`
     
+    ```plaintext
+    # nmcli con del <connection-name>
+    ```
+    
 
 ---
 
-### Useful NetworkManager Commands
+### Useful Network Management Commands
+
+1. **ip**: This command provides information about every network interface. The correct usage is:
+    
+    ```bash
+    ip a
+    ip addr
+    ```
+    
+2. **tracepath**: This command is used to find network delays. It does not require root privileges. The correct usage is:
+    
+    ```bash
+    tracepath www.example.com
+    ```
+    
+3. **ss**: This command is a replacement for the netstat command. It fetches information directly from the kernel userspace. The correct usage is:
+    
+    ```bash
+    ss
+    ```
+    
+4. **host**: This command shows the IP address for a hostname and the domain name for an IP address. It is also used for DNS lookups. The correct usage is:
+    
+    ```bash
+    host -t A www.example.com
+    ```
+    
+5. **hostname**: This command is used to view and set the system’s hostname. The correct usage is:
+    
+    ```bash
+    hostname
+    ```
+    
+6. **curl and wget**: These commands are used to download files from the internet using the command line interface (CLI). The correct usage is:
+    
+    ```bash
+    curl -O https://example.com/path/to/file
+    wget https://example.com/path/to/file
+    ```
+    
+7. **mtr**: This command combines traceroute and ping commands. It regularly shows information related to the packets transferred using the ping time of all hops. The correct usage is:
+    
+    ```bash
+    mtr www.example.com
+    ```
+    
+8. **whois**: This command fetches all website-related information. The correct usage is:
+    
+    ```bash
+    whois www.example.com
+    ```
+    
+9. **tcpdump**: This command is widely used in network analysis. It analyses the traffic passing from the network interface and displays it. The correct usage is:
+    
+    ```bash
+    tcpdump -i eth0
+    ```
+    
+10. **tracepath**: This command traces the path that packets take from your computer to the destination address. The correct usage is:
+    
+    ```bash
+    tracepath www.example.com
+    ```
+    
+11. **tracepath6**: This command is similar to tracepath, but it is used for IPv6 addresses. The correct usage is:
+    
+    ```bash
+    tracepath6 2001:db8:0:2::451
+    ```
+    
+12. **dig**: This command is used to query DNS name servers for information about host addresses, mail exchanges, name servers, and related information. The correct usage is:
+    
+    ```bash
+    dig www.example.com
+    ```
+    
+13. **getent hosts**: This command retrieves entries from the specified administrative database. The correct usage is:
+    
+    ```bash
+    getent hosts www.example.com
+    ```
+    
+14. **ss -tulpn**: This command is used to dump socket statistics and displays listening sockets. The correct usage is:
+    
+    ```bash
+    ss -tulpn
+    ```
+    
+15. **ss -ta**: This command displays all non-listening sockets (that’s established connections). The correct usage is:
+    
+    ```bash
+    ss -ta
+    ```
+    
+16. **ss -lt**: This command displays only listening sockets. The correct usage is:
+    
+    ```bash
+    ss -lt
+    ```
+    
+17. **ip -br addr**: This command displays brief information about the IP addresses of all network interfaces. The correct usage is:
+    
+    ```bash
+    ip -br addr
+    ```
+    
+18. **netstat -tulpn**: This command displays network connections, routing tables, interface statistics, masquerade connections, and multicast memberships. The correct usage is:
+    
+    ```bash
+    netstat -tulpn
+    ```
+    
+19. **ip route**: This command displays the IP routing table. The correct usage is:
+    
+    ```bash
+    ip route
+    ```
+    
+20. **ip -6 route**: This command displays the IPv6 routing table. The correct usage is:
+    
+    ```bash
+    ip -6 route
+    ```
+    
+21. **ping**: This command sends ICMP ECHO\_REQUEST packets to network hosts. The correct usage is:
+    
+    ```bash
+    ping www.example.com
+    ```
+    
+22. **ping6**: This command is similar to ping, but it is used for IPv6 addresses. The correct usage is:
+    
+    ```bash
+    ping6 ::1
+    ```
+    
+23. **ping -c3 192.0.2.254**: This command sends exactly 3 ICMP ECHO\_REQUEST packets to the host with the IP address 192.0.2.254. The correct usage is:
+    
+    ```bash
+    ping -c3 192.0.2.254
+    ```
+    
+24. **ping6 2001:db8:0:1::1**: This command sends ICMP ECHO\_REQUEST packets to the IPv6 address 2001:db8:0:1::1. The correct usage is:
+    
+    ```bash
+    ping6 2001:db8:0:1::1
+    ```
+    
+25. **whois**: This command is used to retrieve domain name information from WHOIS servers. The correct usage is:
+    
+    ```bash
+    whois example.com
+    ```
+    
+26. **nslookup**: This command is used to query Internet domain name servers. The correct usage is:
+    
+    ```bash
+    nslookup www.example.com
+    ```
+    
+27. **ifconfig**: This command is used to display or configure a network interface. The correct usage is:
+    
+    ```bash
+    ifconfig
+    ```
+    
 
 ---
 
