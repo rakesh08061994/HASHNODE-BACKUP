@@ -427,17 +427,56 @@ Why Sockets is important and useful?
     
 9. `How to Add a Network Connection?`
     
-    1. Uses Manual Connection build (Not autoconnect on startup)
+    * Uses Manual Connection build (Not autoconnect on startup)
         
         ```plaintext
-        # nmcli con add con-name test type ethernet ifname ens160 ipv4.addresses 192.168.199.130/24 ipv4.dns 8.8.8.8 ipv4.gateway 192.168.199.254 connection.autoconnect yes ipv4.method manual    
+        # nmcli con add con-name test type ethernet ifname ens160 \
+        ipv4.addresses 192.168.199.130/24 ipv4.dns 8.8.8.8 \
+        ipv4.gateway 192.168.199.254 connection.autoconnect yes ipv4.method manual    
         ```
         
-    2. connection uses a DHCP service and has the device autoconnect on startup.
+    * connection uses a DHCP service and has the device autoconnect on startup.
+        
+        ```plaintext
+        # nmcli con add con-name dynamo type ethernet \
+        ifname ens160 connection.autoconnect yes ipv4.method auto/dhcp
+        ```
         
 10. `How to Modify an existing Network Connections?`
     
-11. `How to delete an Network Connection?`
+    * Modify through Command Line interface
+        
+        ```plaintext
+        # nmcli con mod test ipv4.addresses 192.0.2.2/24 \
+        ipv4.gateway 192.0.2.254 connection.autoconnect yes
+        ```
+        
+    * Modify through direct profile configuration file
+        
+        ```plaintext
+        # vim /etc/NetworkManager/system-connections/test.nmconnection
+        # systemctl restart NetworkManager
+        ```
+        
+        <div data-node-type="callout">
+        <div data-node-type="callout-emoji">💡</div>
+        <div data-node-type="callout-text">Some settings can have multiple values. A specific value can be added to the list or deleted from the connection settings by adding a plus (+) or minus (-) symbol to the start of the setting name. If a plus or minus is not included, then the specified value replaces the setting's current list. The following example adds the 8.8.4.4 DNS server to the test connection.</div>
+        </div>
+        
+        ```plaintext
+        # nmcli con mod test +ipv4.dns 8.8.4.4
+        ```
+        
+11. `How to work with connection profiles?`
+    
+    ```plaintext
+    # nmcli connection show
+    # nmcli connection up <connection-name>
+    # nmcli connection down <connection-name>
+    # nmcli device disconnect <device-IF-name>
+    ```
+    
+12. `How to delete an Network Connection?`
     
 
 ---
