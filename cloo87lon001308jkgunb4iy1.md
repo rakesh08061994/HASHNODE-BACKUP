@@ -60,7 +60,7 @@ Change the Hostname of each machine using hostnamectll command.
 ```bash
 $ sudo hostnamectl set-hostname <your-hostname>
 $ sudo exec bash    # execute the current shell with latest changes 
-$ hostname        
+$ hostname
 ```
 
 ---
@@ -164,10 +164,13 @@ $ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd
 
 $ sudo systemctl restart containerd
 $ sudo systemctl enable containerd
+```
 
+Add Repository for kubernetes
 
-$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/kubernetes-xenial.gpg
-$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+```plaintext
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 > Install kubelet, kubectl, kubeadm
@@ -220,7 +223,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.
 
 ```bash
 $ sudo kubeadm join masternode.example.net:6443 --token vt3ua6.scma2y8rl4menfh2 \
-   --discovery-token-ca-cert-hash sha256:049xaa7fcdced8a8e7b20d37ec0c5dd699ds5f8x616885697q2ff917d4c94962a36 
+   --discovery-token-ca-cert-hash sha256:049xaa7fcdced8a8e7b20d37ec0c5dd699ds5f8x616885697q2ff917d4c94962a36
 ```
 
 <div data-node-type="callout">
@@ -233,7 +236,7 @@ $ sudo kubeadm join masternode.example.net:6443 --token vt3ua6.scma2y8rl4menfh2 
 ### Step - 10 (Test your kubernetes cluster to Deploy an application)
 
 ```bash
-$ kubectl create -f https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/controllers/nginx-deployment.yaml 
+$ kubectl create -f https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/controllers/nginx-deployment.yaml
 ```
 
 ```bash
