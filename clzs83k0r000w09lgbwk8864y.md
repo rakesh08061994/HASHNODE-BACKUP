@@ -62,8 +62,6 @@ On older Red Hat systems, you could just boot into runlevel 1 to get a root prom
 <div data-node-type="callout-text">Now, you’ll have access to a root shell, but there’s a catch—the root file system is mounted as read-only. You’ll need to remount it as read/write to make changes</div>
 </div>
 
-### **Here’s How You Reset the Password:**
-
 7. **Remount the File System:** Run this command to remount the root file system as read/write:
     
     ```plaintext
