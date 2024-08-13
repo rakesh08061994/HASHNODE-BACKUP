@@ -1,10 +1,10 @@
 ---
-title: "Solve: Break Linux Administrative Password on Fedora Machines"
+title: "Solve: Break Linux Administrative Password on Fedora based Linux Machines"
 seoTitle: "Reset Fedora Linux Admin Password"
 seoDescription: "Learn how to reset or break the root password on Fedora systems using boot loader without external media"
 datePublished: Tue Aug 13 2024 09:31:23 GMT+0000 (Coordinated Universal Time)
 cuid: clzs83k0r000w09lgbwk8864y
-slug: solve-break-linux-administrative-password-on-fedora-machines
+slug: solve-break-linux-administrative-password-on-fedora-based-linux-machines
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1723538697242/9088c6d9-0505-4a4c-9cf9-6a6b565f7bb8.png
 tags: linux, hacking, passwords
 
@@ -30,28 +30,29 @@ On older Red Hat systems, you could just boot into runlevel 1 to get a root prom
 
 ### **How to Do It:**
 
+### Approach-1
+
 1. **Reboot Your System:** Start by rebooting your machine.
     
-
-**Interrupt the Boot:** When the boot-loader countdown starts, hit any key (except Enter) to stop it.
-
-> **You will see kernel images here, select "rescue" kernel image. use ↑ & ↓ arrow key to change the selection.**
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540174841/a5b69a16-0fe3-4e36-88ed-d2fd2ecffba8.png align="center")
-
-1. **Select the Rescue Kernel:** Use the arrow keys to move the cursor to the entry with the word "rescue" in its name.
+    **Interrupt the Boot:** When the boot-loader countdown starts, hit any key (except Enter) to stop it.
     
-2. **Edit the Boot Parameters:** Press `e` to edit the selected entry.
+    > **You will see kernel images here, select "rescue" kernel image. use ↑ & ↓ arrow key to change the selection.**
     
-3. **Modify the Kernel Command Line:** Find the line that begins with `linux` and append `rd.break` at the end. This tells the system to pause just before handing control from the initramfs to the actual system.
+2. ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540174841/a5b69a16-0fe3-4e36-88ed-d2fd2ecffba8.png align="center")
+    
+    **Select the Rescue Kernel:** Use the arrow keys to move the cursor to the entry with the word "rescue" in its name.
+    
+3. **Edit the Boot Parameters:** Press `e` to edit the selected entry.
+    
+4. **Modify the Kernel Command Line:** Find the line that begins with `linux` and append `rd.break` at the end after entering a single space. This tells the system to pause just before handing control from the initramfs to the actual system.
     
     ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540357882/0e59b6f6-25fb-4a7d-8cda-da5664ea0358.png align="center")
     
     ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540495481/88a6cd23-9725-4d76-9294-1afc82dcc9f4.png align="center")
     
-4. **Boot with the Changes:** Press `Ctrl+x` to boot with the modified parameters.
+5. **Boot with the Changes:** Press `Ctrl+x` to boot with the modified parameters.
     
-5. **Maintenance Mode:** When prompted, press Enter to enter maintenance mode.
+6. **Maintenance Mode:** When prompted, press Enter to enter maintenance mode.
     
     ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540551196/fe06b0b8-f337-4ce2-a17d-2ddf9e4adbaa.png align="center")
     
@@ -63,19 +64,19 @@ On older Red Hat systems, you could just boot into runlevel 1 to get a root prom
 
 ### **Here’s How You Reset the Password:**
 
-1. **Remount the File System:** Run this command to remount the root file system as read/write:
+7. **Remount the File System:** Run this command to remount the root file system as read/write:
     
     ```plaintext
     switch_root:/# mount -o remount,rw /sysroot
     ```
     
-2. **Enter a Chroot Jail:** This makes `/sysroot` the root of your file-system tree:
+8. **Enter a Chroot Jail:** This makes `/sysroot` the root of your file-system tree:
     
     ```plaintext
     switch_root:/# chroot /sysroot
     ```
     
-3. **Reset the Password:** Set a new root password with this command:
+9. **Reset the Password:** Set a new root password with this command:
     
     ```plaintext
     sh-5.1# passwd root
@@ -85,17 +86,65 @@ On older Red Hat systems, you could just boot into runlevel 1 to get a root prom
     passwd: all authentication tokens updated successfully.
     ```
     
-4. **Ensure Files Get Relabeled:** This step is crucial to avoid SELinux issues later. Run:
+10. **Ensure Files Get Relabeled:** This step is crucial to avoid SELinux issues later. Run:
     
     ```plaintext
     sh-5.1# touch /.autorelabel
     ```
     
-5. **Exit and Reboot:** Type `exit` twice—once to leave the chroot jail and once to exit the initramfs shell. The system will continue booting, perform a full SELinux relabel, and then reboot again. It will take some time to restart, so login now with new password for the root user.
+11. **Exit and Reboot:** Type `exit` twice—once to leave the chroot jail and once to exit the initramfs shell. The system will continue booting, perform a full SELinux relabel, and then reboot again. It will take some time to restart, so login now with new password for the root user.
     
     ```plaintext
     sh-5.1# exit
     switch_root:/# exit
     ```
     
-    And that’s it! You’re back in business with a new root password, and you didn’t even need to mess around with external media. Whether you’re troubleshooting or just making sure you’re prepared for a rainy day, knowing this trick can save you a lot of headaches.
+
+---
+
+### Approach-2
+
+1. **Reboot Your System:** Start by rebooting your machine.
+    
+    **Interrupt the Boot:** When the boot-loader countdown starts, hit any key (except Enter) to stop it.
+    
+    > **You will see kernel images here, select "rescue" kernel image. use ↑ & ↓ arrow key to change the selection.**
+    
+2. ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723540174841/a5b69a16-0fe3-4e36-88ed-d2fd2ecffba8.png align="center")
+    
+    **Select the Rescue Kernel:** Use the arrow keys to move the cursor to the entry with the word "rescue" in its name.
+    
+3. **Edit the Boot Parameters:** Press `e` to edit the selected entry.
+    
+4. **Modify the Kernel Command Line:** Find the line that begins with `linux` and append `rw init=/bin/bash` at the end after entering a single space. This tells the system to pause just before handing control from the initramfs to the actual system.
+    
+    ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723556552752/08cd55d1-169c-4466-bc2b-dbe5c6b9e71a.png align="center")
+    
+5. **Boot with the Changes:** Press `Ctrl+x` to boot with the modified parameters.
+    
+6. **Maintenance Mode:** When prompted, press Enter to enter maintenance mode.
+    
+    ```plaintext
+    bash# passwd root
+    Changing password for user root.
+    New password: **********
+    Retype new password: **********
+    passwd: all authentication tokens updated successfully.
+    touch /.autorelabel
+    /sbin/reboot -f
+    ```
+    
+7. **Ensure Files Get Relabeled:** This step is crucial to avoid SELinux issues later.
+    
+    ```plaintext
+    bash# touch /.autorelabel
+    ```
+    
+8. **Exit and Reboot:** Type `/sbin/reboot -f` and hit enter. Now the system will continue booting, perform a full SELinux relabel, and then reboot again. It will take some time to restart, so login now with new password for the root user.
+    
+    ```plaintext
+    bash# /sbin/reboot -f
+    ```
+    
+
+And that’s it! You’re back in business with a new root password, and you didn’t even need to mess around with external media. Whether you’re troubleshooting or just making sure you’re prepared for a rainy day, knowing this trick can save you a lot of headaches.
