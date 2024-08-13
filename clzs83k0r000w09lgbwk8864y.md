@@ -128,8 +128,6 @@ On older Red Hat systems, you could just boot into runlevel 1 to get a root prom
     New password: **********
     Retype new password: **********
     passwd: all authentication tokens updated successfully.
-    touch /.autorelabel
-    /sbin/reboot -f
     ```
     
 7. **Ensure Files Get Relabeled:** This step is crucial to avoid SELinux issues later.
