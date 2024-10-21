@@ -125,7 +125,7 @@ The output look something like this:
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 sda      8:0    0   100G  0 disk 
 sdb      8:16   0   100G  0 disk 
-sdc      8:32   0   100G  0 disk 
+sdc      8:32   0   100G  0 disk
 ```
 
 1. **Check the file system disk space usage**: You can use the `df -h` command to check the file system disk space usage.
@@ -276,7 +276,7 @@ $ sudo lvs
   LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv_vol1 vg_vol -wi-a-----  50.00g                                                    
   lv_vol2 vg_vol -wi-a-----  50.00g                                                    
-  lv_vol3 vg_vol -wi-a-----  50.00g   
+  lv_vol3 vg_vol -wi-a-----  50.00g
 ```
 
 ```bash
@@ -297,7 +297,6 @@ $ sudo lvdisplay /dev/vg_vol/lv_vol1
   Read ahead sectors     auto
   - currently set to     256
   Block device           253:2
-                                         
 ```
 
 This shows that the logical volumes `lv_vol1`, `lv_vol2`, and `lv_vol3` have been successfully created in the volume group `vg_vol` each with a size of 50GB.
@@ -335,7 +334,7 @@ sdc              8:32   0   100G  0 disk
 └─vg_vol       253:0    0   300G  0 lvm  
   ├─lv_vol1    253:1    0    50G  0 lvm  
   ├─lv_vol2    253:2    0    50G  0 lvm  
-  └─lv_vol3    253:3    0    50G  0 lvm  
+  └─lv_vol3    253:3    0    50G  0 lvm
 ```
 
 1. **Print Block Device Attributes**: You can use the `blkid` command to print the block device attributes.
@@ -534,6 +533,18 @@ sdc              8:32   0   100G  0 disk
   └─lv_vol3    253:3    0    50G  0 lvm  /mnt/lv_mount3
 ```
 
+2. **Increasing the size of an VG pool (**`vgextend`):
+    
+    Extending a Volume Group (VG) in LVM means adding more disks to give extra storage space to VG group. This allows you to handle more data without shutting down your system. It makes it easier to manage your storage and keeps everything running smoothly as your needs grow.
+    
+    to extend the VG, we have to require some newly created PV disks. For example we have one more disk “**/dev/sdd**“, so add this PV into vg\_vol
+    
+    ```plaintext
+    $ vgextend vg_vol /dev/sdd
+    Volume group "vg_vol" successfully extended
+    ```
+    
+
 ---
 
 * ### Taking a snapshot of LVM and its uses
@@ -603,12 +614,33 @@ sdc              8:32   0   100G  0 disk
 
 ---
 
-* Restoring from a snapshot state
+3. How to remove active PV from the LVM
     
-
----
-
-* How to remove active PV from the LVM
+    At times in a production environment, you may encounter issues with an active PV (Physical Volume). When this happens, the solution is often to replace it with a new disk. However, as an administrator, you must consider the data stored on the PV. So, what’s the correct approach?
     
+    1. **Move the data from the removable PV to another available PV.**
+        
+        For example we are removing a PV named **“/dev/sdb“**
+        
+        ```plaintext
+        $ pvmove /dev/sdb /dev/sda
+          /dev/sdb: Moved: 0.39%
+          /dev/sdb: Moved: 100.00%
+        ```
+        
+    2. **Reduce the VG (Volume Group) size.**
+        
+        ```plaintext
+        $ vgreduce vg_vol /dev/sdb
+          Removed "/dev/sdb" from volume group "vg_vol"
+        ```
+        
+    3. **Safely remove the PV from the Volume Group.**
+        
+        ```plaintext
+        $ pvremove /dev/sdb
+          Labels on physical volume "/dev/sdb" successfully wiped.
+        ```
+        
 
 ---
