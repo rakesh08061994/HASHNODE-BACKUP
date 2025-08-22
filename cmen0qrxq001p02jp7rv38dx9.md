@@ -9,22 +9,11 @@ tags: aws, projects, freelancing, devops, gitlab, gitlab-ci, gitlab-runner, devo
 
 ---
 
-> *Most of the time in their life, people find themselves lost, lazy, and waiting for someone else to help them out of the darkness. But the truth is—strength comes from within. We rise when we decide to take that first step forward.*
-> 
-> *Every big journey begins with a small step. I believe that even small progress is still progress. Fear and laziness may try to stop us, but discipline and consistency always win. What truly matters is starting, and then moving forward—step by step—with confidence and purpose.*
-> 
-> *With this mindset, I’m beginning to share my learnings through this blog. The tool I recently started exploring is* ***\[Tool Name\]****, and in this post, I’ll walk you through what I’ve discovered, how I practiced it, and why it can add real value.*
-
----
-
-In this blog we are going to create a GitLab project, that will showcase the skillset regarding GitLab tool.  
-So project will look like this
-
-# Open your GitLab account
+> In this blog we are going to create a GitLab project, that will showcase the skillset regarding GitLab tool.
 
 # Create a Group and a project within
 
-You can create a group, directly go to **“New group“** button, there you will see two ways to create group, but you need to create a group by click on **“Create Group“** . Give him a name and done, you have successfully created a group. In GitLab, your group is like user account in GitHub, ex: **GitHub-username**
+Open your GitLab account and follow these steps one by one. I will guide you if you are starting from basic, so you have to create a group, for this directly go to GitLab account and click on **“New group“** button, there you will see two ways to create group, but you need to create a group by click on **“Create Group“** . Give him a name and done, you have successfully created a group. In GitLab, your group is like user account in GitHub, ex: **GitHub-username**
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755861555972/27535335-1216-4dac-8c65-b9a0f01a4268.png align="center")
 
@@ -193,7 +182,7 @@ Go to build &gt; pipeline &gt;
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755876665408/2ae7e9e6-fd62-4819-ac70-8359d424897c.png align="center")
 
-If you want to see on instance, there is docker container is running on port 8000.  
+If you want to see on instance, there is docker container is running on port 8000.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755876731152/c6b44f1d-d22f-46fd-95bb-26510ef132f2.png align="center")
 
