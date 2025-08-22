@@ -196,6 +196,12 @@ Because we have deployed application on ec2-instance so will see the output usin
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755877118878/50c92c42-a637-4d82-8e61-9767788a5c52.png align="center")
 
+# Notification Alerts
+
+GitLab normally provides alert notification service
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1755879468429/b1938b79-564c-43fe-8388-f4e9877456c8.png align="center")
+
 # Output Logs
 
 * Build\_job
