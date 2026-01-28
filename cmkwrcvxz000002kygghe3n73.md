@@ -1,8 +1,13 @@
 ---
 title: "Real-World, Production-Ready GitOps Project for DevOps Practitioners"
+seoTitle: "GitOps Project Guide for DevOps Professionals"
+seoDescription: "Learn GitOps with a comprehensive, real-world DevOps project. Gain production-ready skills using ArgoCD, Kubernetes, Docker, and more"
 datePublished: Tue Jan 27 2026 15:35:25 GMT+0000 (Coordinated Universal Time)
 cuid: cmkwrcvxz000002kygghe3n73
 slug: real-world-production-ready-gitops-project-for-devops-practitioners
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1769612553760/0041f9d9-fad0-4656-9761-31b7c8e9e6fe.png
+ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1769613047586/6cceedec-0f66-4ec8-b930-f23b77fe0d66.png
+tags: linux, github, projects, kubernetes, git, devops, jobs, cicd-cjy1vtdk2005kjjs17n8couc3, devops-articles, argocd, devops-journey
 
 ---
 
@@ -27,6 +32,8 @@ In this project, we will work with the following tools and technologies:
 * **Kubernetes** (for microservices-based application deployment)
     
 * **Kubernetes Dashboard** (for pod-level monitoring)
+    
+* **HPA** (For Pod Auto-Scale as per matrix Data)
     
 * **ArgoCD** (GitOps tool to tightly sync Git & GitHub for continuous deployment)
     
@@ -70,7 +77,6 @@ Storage Volume: 24 GB Minimum
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769517801215/905f659e-24b1-4d06-83c0-fdef761f99d2.png align="center")
 
-  
 We will use direct aws console to access terminal
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769517869175/97cb1a4f-adac-4f31-a579-afe635158395.png align="center")
@@ -83,7 +89,9 @@ apt install -y vim git docker.io
 systemctl enable --now docker
 ```
 
-Step-3: Now we have to install KIND so we can create k8s mini cluster. So for this we have to create some script. and then run the script after give the execute permission.
+---
+
+## **Step-2: Now we have to install KIND so we can create k8s mini cluster. So for this we have to create some script. and then run the script after give the execute permission.**
 
 ```plaintext
 # vim install_kind.sh
@@ -93,7 +101,7 @@ Step-3: Now we have to install KIND so we can create k8s mini cluster. So for th
 [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
 chmod +x ./kind
 sudo cp ./kind /usr/local/bin/kind
-rm -rf kind 
+rm -rf kind
 ```
 
 ```plaintext
@@ -140,6 +148,8 @@ sudo docker ps -a
 
 Your Docker is installed successfully. However, to access the Kubernetes cluster, you need a command-line tool, which is "kubectl."
 
+---
+
 ## **Step-3: Install kubectl command in KIND cluster.**
 
 ```plaintext
@@ -167,6 +177,8 @@ echo "kubectl installation complete."
 chmod +x install_kubectl.sh
 bash install_kubectl.sh
 ```
+
+---
 
 ## **Step-4: Install the KIND cluster,** so we have to create a KIND config file, that specify the core specification details regarding your KIND cluster nodes.
 
@@ -207,6 +219,8 @@ kubectl get no -o wide
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769519350514/68e5f494-ed2f-49b0-86b0-c92100604326.png align="center")
 
+---
+
 ## **Step-5: The GitHUB Repository Server**
 
 Over this KIND cluster, your application will deploy. But what about the project application files? As you know, we are working on a LAMP WordPress application, and we have a dedicated GitHub repository server for this, where you will get all the required files and folders. Because this is a GitOps project, GitHub is the core artifact server.
@@ -226,6 +240,8 @@ Go to this link: [projectwala/Basic-Level/Project-2 at main · devrakaops/projec
 The Kubernetes folder has all the YAML for our project, which we will use.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769520011702/6d1cde76-031f-422a-9c2d-dc2ec7797efc.png align="center")
+
+---
 
 ## **Step-6. Installing Argo CD**
 
@@ -308,6 +324,8 @@ Paste the password to the UI dashboard
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769521615107/dbd74630-72f3-4591-b55e-4e2baca8bd75.png align="center")
 
 This is simple interface of ArgoCD dashboard.
+
+---
 
 ## **Step-7: Setup the application in ArgoCD**
 
@@ -394,6 +412,8 @@ Finally you will get the application at the end.
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769523725304/caee6e68-12bc-478a-ad1c-b7e363831431.png align="center")
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769523787712/b88fed7a-5e3e-45e5-9f0e-767c77d39da3.png align="center")
+
+---
 
 ## **Step-8: Install Kubernetes Dashboard for pod level monitoring**
 
@@ -517,13 +537,14 @@ You will get the complete resources namespace vise
 
 Change the namespace and you can access the related resources of namespace.
 
-  
 There are many possibilities in this project:
 
 * We can add monitoring pods for metrics and log-based monitoring using Prometheus, Grafana, Loki, and exporters.
     
 * We can set up Kubernetes pod autoscaling and more.
     
+
+---
 
 ## **Step 9: Set up Pod Autoscaler for load-based deployment management**
 
@@ -591,7 +612,7 @@ spec:
 Now check again the HPA status
 
 ```yaml
-kubectl get hpa 
+kubectl get hpa
 ```
 
 ```yaml
@@ -600,3 +621,13 @@ php-apache   Deployment/wordpress   cpu: 0%/50%   1         5         1         
 ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1769527940042/e827e617-1926-43af-8a1c-ecb3944676e4.png align="center")
+
+---
+
+So that was the project practical documentation! I hope you gain some real-world insights into DevOps tools and technologies and get hands-on experience with a real-world project!  
+
+Don't forget to share this with your colleagues, friends, and your group!  
+See you soon in the next amazing project!  
+
+Thank you,  
+Rakesh Kumar Jangid.
